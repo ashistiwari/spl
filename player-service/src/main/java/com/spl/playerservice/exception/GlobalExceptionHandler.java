@@ -1,3 +1,4 @@
+/*
 package com.spl.playerservice.exception;
 import com.spl.commonlibrary.dto.ApiResponse;
 
@@ -28,27 +29,25 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<Map<String,String>>(response, HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ApiResponse> handleResourceNotFOundException(ResourceNotFoundException ex) {
-        ApiResponse apiResponse = ApiResponse.builder()
-                .success("false")
-                .message(ex.getMessage())
-                .build();
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
-    }
-    @ExceptionHandler(DuplicateResourceException.class)
-    public ResponseEntity<ApiResponse> handleDuplicateResourceException(DuplicateResourceException ex) {
-        ApiResponse apiResponse=ApiResponse.builder()
-                .success("false")
-                .message(ex.getMessage())
-                .build();
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse);
-    }
-    @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<ApiResponse> handleBadRequest(BadRequestException ex) {
-        ApiResponse apiResponse=ApiResponse.builder()
-                .success("false")
-                .message(ex.getMessage())
-                .build();
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
-    }
+        public ResponseEntity<ApiResponse> handleResourceNotFOundException(ResourceNotFoundException ex) {
+            ApiResponse apiResponse = new ApiResponse();
+            apiResponse.setSuccess("false");
+            apiResponse.setMessage(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
+        }
+        @ExceptionHandler(DuplicateResourceException.class)
+        public ResponseEntity<ApiResponse> handleDuplicateResourceException(DuplicateResourceException ex) {
+            ApiResponse apiResponse = new ApiResponse();
+            apiResponse.setSuccess("false");
+            apiResponse.setMessage(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(apiResponse);
+        }
+        @ExceptionHandler(BadRequestException.class)
+        public ResponseEntity<ApiResponse> handleBadRequest(BadRequestException ex) {
+            ApiResponse apiResponse = new ApiResponse();
+            apiResponse.setSuccess("false");
+            apiResponse.setMessage(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
+        }
 }
+*/

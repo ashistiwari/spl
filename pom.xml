@@ -24,8 +24,8 @@
        <module>discovery-server</module>
        <module>api-gateway</module>
           <module>player-service</module>
-        <!-- <module>match-service</module>
-         <module>score-service</module>
+         <module>match-service</module>
+        <!-- <module>score-service</module>
          <module>notification-service</module>
          <module>statistics-service</module>-->
        <module>common-library</module>
