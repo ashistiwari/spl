@@ -1,6 +1,8 @@
 package com.spl.matchservice.dto;
 
 import com.spl.matchservice.enums.MatchStatus;
+import com.spl.matchservice.enums.TeamNumber;
+import com.spl.matchservice.enums.TossDecision;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -14,13 +16,14 @@ public class MatchResponse {
 
     private Long id;
 
-    private String matchName;
-
     private LocalDate matchDate;
 
-    private String venue;
+    private MatchStatus status;
 
     private Integer totalOvers;
 
-    private MatchStatus status;
+    private TeamNumber tossWinner;
+
+    private TossDecision tossDecision;
+    private TeamNumber matchWinner;
 }

@@ -1,5 +1,7 @@
 package com.spl.matchservice.dto;
 
+import com.spl.matchservice.enums.TeamNumber;
+import com.spl.matchservice.enums.TossDecision;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -18,13 +20,25 @@ public class CreateMatchRequest {
 
 
 
-    @Min(1)
-    @Max(50)
+    @Min(5)
+    @Max(8)
     private Integer totalOvers;
+    @NotEmpty
+    private List<Long> teamOnePlayers;
 
     @NotEmpty
-    private Integer teamOneId;
-    @NotEmpty
-    private Integer teamTwoId;
+    private List<Long> teamTwoPlayers;
+
+    @NotNull
+    private Long captainTeamOne;
+
+    @NotNull
+    private Long captainTeamTwo;
+
+    @NotNull
+    private TeamNumber tossWinner;
+
+    @NotNull
+    private TossDecision tossDecision;
 
 }

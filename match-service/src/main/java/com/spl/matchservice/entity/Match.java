@@ -2,9 +2,9 @@ package com.spl.matchservice.entity;
 
 import com.spl.commonlibrary.entity.BaseEntity;
 import com.spl.matchservice.enums.MatchStatus;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.spl.matchservice.enums.TeamNumber;
+import com.spl.matchservice.enums.TossDecision;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -17,14 +17,15 @@ public class Match extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String matchName;
-    private String venue;
     private Integer totalOvers;
-    private Long teamOneId;
-    private Long teamTwoId;
-    private LocalDate matchDate;
+    @Enumerated(EnumType.STRING)
     private MatchStatus status;
-    private Long tossWinnerTeamId;
-    private Long matchWinnerTeamId;
+    private LocalDate matchDate;
+    @Enumerated(EnumType.STRING)
+    private TossDecision tossDecision;
+    @Enumerated(EnumType.STRING)
+    private TeamNumber tossWinner;
+    @Enumerated(EnumType.STRING)
+    private TeamNumber matchWinner;
     private Boolean active;
 }
