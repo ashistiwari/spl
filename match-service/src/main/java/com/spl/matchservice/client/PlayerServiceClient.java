@@ -1,13 +1,12 @@
 package com.spl.matchservice.client;
 
-import com.spl.matchservice.enums.MatchStatus;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import java.time.LocalDate;
+@FeignClient(name = "player-service")
+public interface PlayerServiceClient {
 
-public class PlayerServiceClient {
-
-
+    @GetMapping("/api/players/{playerId}")
+    Object getPlayer(@PathVariable Long playerId);
 }

@@ -25,6 +25,7 @@
        <module>api-gateway</module>
           <module>player-service</module>
          <module>match-service</module>
+        <module>matchDay-service</module>
          <module>team-service</module>
         <!--<module>notification-service</module>
         <module>statistics-service</module>-->

@@ -15,9 +15,12 @@ public class MatchPlayer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long playerId;
-    private Long matchId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "match_id")
+    private Match match;
     @Enumerated(EnumType.STRING)
     private TeamNumber team;
     private Boolean captain;
+
 
 }
