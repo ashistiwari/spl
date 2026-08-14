@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TeamRequest {
+public class  TeamRequest {
     @NotEmpty
     private List<Long> playerIds;
     @NotNull

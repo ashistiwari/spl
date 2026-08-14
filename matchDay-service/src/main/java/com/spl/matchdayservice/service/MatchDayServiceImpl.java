@@ -58,6 +58,8 @@ public class MatchDayServiceImpl implements MatchDayService {
 
         savePlayers(teamTwo,
                 request.getTeamTwo());
+        matchDay.getTeams().add(teamOne);
+        matchDay.getTeams().add(teamTwo);
     }
     private void savePlayers(Team team, TeamRequest teamRequest){
         for(Long playerId:teamRequest.getPlayerIds()){
@@ -67,7 +69,9 @@ public class MatchDayServiceImpl implements MatchDayService {
                     .team(team)
                     .build();
             teamPlayerRepository.save(player);
+            team.getPlayers().add(player);
         }
+
     }
 
     @Override

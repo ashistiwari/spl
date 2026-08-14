@@ -35,5 +35,6 @@ public class Team {
             cascade=CascadeType.ALL,
             orphanRemoval=true
     )
+    @Builder.Default
     private List<TeamPlayer> players = new ArrayList<>();
 }
