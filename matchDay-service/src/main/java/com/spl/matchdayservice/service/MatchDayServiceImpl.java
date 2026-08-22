@@ -3,6 +3,7 @@ package com.spl.matchdayservice.service;
 import com.spl.matchdayservice.dto.CreateMatchDayRequest;
 import com.spl.matchdayservice.dto.MatchDayResponse;
 import com.spl.matchdayservice.dto.TeamRequest;
+import com.spl.matchdayservice.dto.UpdateMatchResultRequest;
 import com.spl.matchdayservice.entity.MatchDay;
 import com.spl.matchdayservice.entity.Team;
 import com.spl.matchdayservice.entity.TeamPlayer;
@@ -91,5 +92,38 @@ public class MatchDayServiceImpl implements MatchDayService {
         MatchDay matchDay = matchDayRepository.findById(id).orElseThrow(() -> new RuntimeException("MatchDay not found with id: " + id));
         matchDay.setStatus(MatchDayStatus.COMPLETED);
         return MatchDayMapper.toResponse(matchDayRepository.save(matchDay));
+    }
+
+    @Override
+    public MatchDayResponse updatematchResult(Long matchDayId, UpdateMatchResultRequest request) {
+        MatchDay matchDay = matchDayRepository.findById(matchDayId)
+                                                .orElseThrow(() -> new RuntimeException("MatchDay not found with id: " + matchDayId));
+        if (matchDay.getStatus()==MatchDayStatus.COMPLETED) {
+            throw new RuntimeException("MatchDay already completed");
+        }
+        matchDay.setMatchWinner(request.getMatchWinner());
+        matchDay.setTossWinner(request.getTossWInner());
+        matchDay.setTeamOneScore(request.getTeamOneScore());
+        matchDay.setTeamTwoScore(request.getTeamTwoScore());
+        matchDay.setStatus(MatchDayStatus.COMPLETED);
+        matchDay.setActive(false);
+        MatchDay savedmatchDay = matchDayRepository.save(matchDay);
+        updateTeamStatistics(savedmatchDay);
+        return MatchDayMapper.toResponse(savedmatchDay);
+    }
+
+    private void updateTeamStatistics(MatchDay matchDay){
+        TeamNumber winner=matchDay.getMatchWinner();
+        for(Team team: matchDay.getTeams()){
+            if(winner == null){
+                team.setTies(team.getTies()+1);
+            } else if (team.getTeamNumber() == winner) {
+                team.setWins(team.getWins()+1);
+            } else {
+                team.setLosses(team.getLosses()+1);
+                
+            }
+        }
+        teamRepository.saveAll(matchDay.getTeams());
     }
 }

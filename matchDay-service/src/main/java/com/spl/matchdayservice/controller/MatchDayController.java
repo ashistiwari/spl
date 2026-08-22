@@ -2,6 +2,7 @@ package com.spl.matchdayservice.controller;
 
 import com.spl.matchdayservice.dto.CreateMatchDayRequest;
 import com.spl.matchdayservice.dto.MatchDayResponse;
+import com.spl.matchdayservice.dto.UpdateMatchResultRequest;
 import com.spl.matchdayservice.service.MatchDayService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -44,5 +45,14 @@ public class MatchDayController {
         return ResponseEntity.ok(
                 matchDayService.completeMatchDay(id));
 
+    }
+
+    @PutMapping("/{matchDayId}/result")
+    public ResponseEntity<MatchDayResponse> updateMatchResults(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateMatchResultRequest request){
+        MatchDayResponse response=matchDayService.updatematchResult(id,request);
+        return ResponseEntity.ok(
+                matchDayService.updatematchResult(id, request));
     }
 }

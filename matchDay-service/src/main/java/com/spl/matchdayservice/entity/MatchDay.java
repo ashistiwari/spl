@@ -2,6 +2,7 @@ package com.spl.matchdayservice.entity;
 
 import com.spl.commonlibrary.entity.BaseEntity;
 import com.spl.matchdayservice.enums.MatchDayStatus;
+import com.spl.matchdayservice.enums.TeamNumber;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +22,13 @@ public class MatchDay extends BaseEntity{
     private Long id;
 
     private LocalDate matchDate;
+    @Enumerated(EnumType.STRING)
+    private TeamNumber tossWinner;
+    @Enumerated(EnumType.STRING)
+    private TeamNumber matchWinner;
+
+    private Integer teamOneScore;
+    private Integer teamTwoScore;
 
     @Enumerated(EnumType.STRING)
     private MatchDayStatus status;
@@ -34,5 +42,9 @@ public class MatchDay extends BaseEntity{
     )
     @Builder.Default
     private List<Team> teams = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "series_id")
+    private Series series;
 }
 

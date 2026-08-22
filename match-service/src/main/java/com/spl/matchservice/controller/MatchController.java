@@ -2,7 +2,9 @@ package com.spl.matchservice.controller;
 
 import com.spl.matchservice.dto.CreateMatchRequest;
 import com.spl.matchservice.dto.MatchResponse;
+import com.spl.matchservice.dto.UpdateMatchResultRequest;
 import com.spl.matchservice.service.MatchService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +21,18 @@ public class MatchController {
 
     @PostMapping("/create")
     public ResponseEntity<MatchResponse> createMatch(@RequestBody CreateMatchRequest request) {
+
         return ResponseEntity.status(HttpStatus.CREATED).body(matchService.createMatch(request));
+    }
+    @PutMapping("/{matchId}/result")
+    public ResponseEntity<MatchResponse> updateMatchResult(
+            @PathVariable Long matchId,
+            @Valid @RequestBody UpdateMatchResultRequest request) {
+
+        MatchResponse response =
+                matchService.updateMatchResult(matchId, request);
+
+        return ResponseEntity.ok(response);
     }
 
 

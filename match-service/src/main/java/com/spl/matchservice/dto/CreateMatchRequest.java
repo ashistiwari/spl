@@ -14,32 +14,17 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class CreateMatchRequest {
-
-
     @FutureOrPresent
     private LocalDate matchDate;
-
-
-
     @Min(5)
     @Max(8)
     private Integer totalOvers;
-
     @Valid
     private MatchTeamRequest teamOne;
     @Valid
     private MatchTeamRequest teamTwo;
-
-    @NotNull
-    private Long captainTeamOne;
-
-    @NotNull
-    private Long captainTeamTwo;
-
     @NotNull
     private TeamNumber tossWinner;
-
     @NotNull
     private TossDecision tossDecision;
-
 }
